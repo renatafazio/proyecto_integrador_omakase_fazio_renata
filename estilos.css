@@ -9,7 +9,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 body { margin: 0; background: var(--fondo); color: var(--texto-oscuro); font-family: "Raleway", Arial, sans-serif; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -21,7 +21,7 @@ p { text-wrap: pretty; }
 .descripcion-celular, .texto-menu-celular, .texto-reserva-celular { display: none; }
 
 /* Encabezado */
-.encabezado-sitio { position: relative; z-index: 5; height: 140px; background: var(--fondo-encabezado); }
+.encabezado-sitio { position: sticky; top: 0; z-index: 50; height: 140px; background: var(--fondo-encabezado); }
 .contenido-encabezado { width: min(1360px, calc(100% - 80px)); height: 100%; margin: auto; display: grid; grid-template-columns: 290px 1fr 290px; align-items: center; }
 .marca { display: block; width: 250px; }
 .marca img { width: 100%; height: 135px; object-fit: contain; }
@@ -164,6 +164,7 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
 .opcion-oculta:focus-visible + label { outline: 3px solid #5c4625; outline-offset: 3px; }
 .formulario-giftcard > label { margin-top: 42px; }
 .formulario-giftcard input:not(.opcion-oculta) { height: 54px; padding: 10px 25px; font-size: 20px; }
+.formulario-giftcard .selector-fecha input { padding-right: 48px; background-image: url("imagenes/calendario.svg"); background-repeat: no-repeat; background-position: right 18px center; background-size: 21px; cursor: pointer; }
 .campos-entrega { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; margin-top: 54px; }
 .campos-entrega input { max-width: 260px; }
 .formulario-giftcard textarea { min-height: 156px; padding: 16px 25px; font-size: 20px; resize: vertical; }
@@ -213,6 +214,7 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
 }
 
 @media (max-width: 800px) {
+  html { scroll-padding-top: 64px; }
   .encabezado-sitio { height: 64px; }
   .contenido-encabezado { width: calc(100% - 36px); display: flex; justify-content: space-between; }
   .marca { width: 126px; }
@@ -263,7 +265,8 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
   .opciones-valor, .opciones-destinatario { gap: 8px; }
   .opciones-valor label, .opciones-destinatario label { min-height: 42px; padding: 7px 10px; font-size: 14px; }
   .opciones-destinatario label { min-width: 0; }
-  .campos-entrega { gap: 16px; margin-top: 27px; }
+  .campos-entrega { grid-template-columns: 1fr; gap: 18px; margin-top: 27px; }
+  .campos-entrega input { max-width: none; min-width: 0; }
   .formulario-giftcard legend, .formulario-giftcard > label, .campos-entrega label { font-size: 19px; }
   .formulario-giftcard input:not(.opcion-oculta) { height: 42px; }
   .seccion-confirmacion { padding: 150px 26px 150px; }
@@ -367,8 +370,8 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
   .opciones-valor label, .opciones-destinatario label { min-height: 42px; font-size: 14px; padding: 7px 10px; }
   .formulario-giftcard > label { margin-top: 27px; }
   .formulario-giftcard input:not(.opcion-oculta) { height: 42px; padding: 8px 13px; font-size: 15px; }
-  .campos-entrega { gap: 12px; }
-  .campos-entrega label { min-height: 48px; }
+  .campos-entrega { gap: 18px; }
+  .campos-entrega label { min-height: 0; }
   .formulario-giftcard textarea { min-height: 105px; padding: 11px 13px; font-size: 15px; }
   .aclaracion-giftcard { font-size: 13px; }
   .boton-comprar { padding: 10px; font-size: 16px; }

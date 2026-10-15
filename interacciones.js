@@ -150,6 +150,103 @@ if (formularioGiftcard) {
   const paraOtraPersona = document.querySelector("#destino-otra");
   const etiquetaCorreo = document.querySelector("#etiqueta-correo");
   const etiquetaNombre = document.querySelector("#etiqueta-nombre");
+  const fechaEntrega = document.querySelector("#fecha-entrega");
+  const horaEntrega = document.querySelector("#hora-entrega");
+  const calendarioEntrega = document.querySelector("#calendario-entrega");
+  const mesCalendarioEntrega = document.querySelector("#mes-calendario-entrega");
+  const diasCalendarioEntrega = document.querySelector("#dias-calendario-entrega");
+  const mesAnteriorEntrega = document.querySelector("#mes-anterior-entrega");
+  const mesSiguienteEntrega = document.querySelector("#mes-siguiente-entrega");
+  const errorFechaEntrega = document.querySelector("#error-fecha-entrega");
+  const hoy = new Date();
+  let mesVisibleEntrega = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+
+  function diaDeHoyEntrega() {
+    const fecha = new Date();
+    return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+  }
+
+  function cerrarCalendarioEntrega() {
+    calendarioEntrega.hidden = true;
+    fechaEntrega.setAttribute("aria-expanded", "false");
+  }
+
+  function dibujarCalendarioEntrega() {
+    const anio = mesVisibleEntrega.getFullYear();
+    const mes = mesVisibleEntrega.getMonth();
+    mesCalendarioEntrega.textContent = new Intl.DateTimeFormat("es-AR", {
+      month: "long", year: "numeric"
+    }).format(mesVisibleEntrega);
+    mesAnteriorEntrega.disabled = mesVisibleEntrega <= new Date(diaDeHoyEntrega().getFullYear(), diaDeHoyEntrega().getMonth(), 1);
+    diasCalendarioEntrega.replaceChildren();
+
+    const espacios = (new Date(anio, mes, 1).getDay() + 6) % 7;
+    for (let i = 0; i < espacios; i++) {
+      const espacio = document.createElement("span");
+      espacio.setAttribute("aria-hidden", "true");
+      diasCalendarioEntrega.append(espacio);
+    }
+
+    const cantidadDias = new Date(anio, mes + 1, 0).getDate();
+    for (let dia = 1; dia <= cantidadDias; dia++) {
+      const fecha = new Date(anio, mes, dia);
+      const boton = document.createElement("button");
+      boton.type = "button";
+      boton.textContent = String(dia);
+      boton.disabled = fecha < diaDeHoyEntrega();
+      boton.setAttribute("aria-label", new Intl.DateTimeFormat("es-AR", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+      }).format(fecha));
+
+      const iso = [anio, String(mes + 1).padStart(2, "0"), String(dia).padStart(2, "0")].join("-");
+      if (fechaEntrega.dataset.fecha === iso) boton.setAttribute("aria-pressed", "true");
+      boton.addEventListener("click", () => {
+        fechaEntrega.dataset.fecha = iso;
+        fechaEntrega.value = [String(dia).padStart(2, "0"), String(mes + 1).padStart(2, "0"), anio].join("/");
+        fechaEntrega.removeAttribute("aria-invalid");
+        errorFechaEntrega.hidden = true;
+        cerrarCalendarioEntrega();
+        horaEntrega.focus();
+      });
+      diasCalendarioEntrega.append(boton);
+    }
+  }
+
+  function abrirCalendarioEntrega() {
+    if (!calendarioEntrega.hidden) return;
+    dibujarCalendarioEntrega();
+    calendarioEntrega.hidden = false;
+    fechaEntrega.setAttribute("aria-expanded", "true");
+    diasCalendarioEntrega.querySelector("button:not(:disabled)")?.focus();
+  }
+
+  fechaEntrega.addEventListener("click", () => {
+    if (calendarioEntrega.hidden) abrirCalendarioEntrega();
+    else cerrarCalendarioEntrega();
+  });
+  fechaEntrega.addEventListener("keydown", (evento) => {
+    if (["Enter", " ", "ArrowDown"].includes(evento.key)) {
+      evento.preventDefault();
+      abrirCalendarioEntrega();
+    }
+  });
+  mesAnteriorEntrega.addEventListener("click", () => {
+    mesVisibleEntrega.setMonth(mesVisibleEntrega.getMonth() - 1);
+    dibujarCalendarioEntrega();
+  });
+  mesSiguienteEntrega.addEventListener("click", () => {
+    mesVisibleEntrega.setMonth(mesVisibleEntrega.getMonth() + 1);
+    dibujarCalendarioEntrega();
+  });
+  document.addEventListener("click", (evento) => {
+    if (!evento.target.closest(".selector-fecha")) cerrarCalendarioEntrega();
+  });
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && !calendarioEntrega.hidden) {
+      cerrarCalendarioEntrega();
+      fechaEntrega.focus();
+    }
+  });
 
   function actualizarDestinatario() {
     etiquetaCorreo.textContent = paraMi.checked ? "Tu correo electrónico:" : "Correo electrónico del destinatario:";
@@ -161,6 +258,15 @@ if (formularioGiftcard) {
 
   formularioGiftcard.addEventListener("submit", (evento) => {
     evento.preventDefault();
+    const partes = (fechaEntrega.dataset.fecha || "").split("-").map(Number);
+    const fechaElegida = partes.length === 3 ? new Date(partes[0], partes[1] - 1, partes[2]) : null;
+    if (!fechaElegida || fechaElegida < diaDeHoyEntrega()) {
+      errorFechaEntrega.textContent = "Elegí una fecha de entrega de hoy en adelante.";
+      errorFechaEntrega.hidden = false;
+      fechaEntrega.setAttribute("aria-invalid", "true");
+      fechaEntrega.focus();
+      return;
+    }
     window.location.href = "confirmacion-compra.html";
   });
 }

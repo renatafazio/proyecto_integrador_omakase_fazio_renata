@@ -53,7 +53,20 @@
             <label for="nombre-destinatario" id="etiqueta-nombre">Nombre del destinatario:</label>
             <input id="nombre-destinatario" name="nombre-destinatario" type="text" placeholder="Escriba aquí..." required>
             <div class="campos-entrega">
-              <div><label for="fecha-entrega">Fecha de entrega:</label><input id="fecha-entrega" name="fecha-entrega" type="date" required></div>
+              <div class="selector-fecha">
+                <label for="fecha-entrega">Fecha de entrega:</label>
+                <input id="fecha-entrega" name="fecha-entrega" type="text" placeholder="Elegí una fecha" readonly required aria-haspopup="dialog" aria-controls="calendario-entrega" aria-expanded="false" aria-errormessage="error-fecha-entrega">
+                <div class="calendario-reserva" id="calendario-entrega" role="dialog" aria-label="Elegir fecha de entrega" hidden>
+                  <div class="cabecera-calendario">
+                    <button type="button" id="mes-anterior-entrega" aria-label="Mes anterior">‹</button>
+                    <strong id="mes-calendario-entrega" aria-live="polite"></strong>
+                    <button type="button" id="mes-siguiente-entrega" aria-label="Mes siguiente">›</button>
+                  </div>
+                  <div class="dias-semana" aria-hidden="true"><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span></div>
+                  <div class="dias-calendario" id="dias-calendario-entrega"></div>
+                </div>
+                <p class="error-fecha" id="error-fecha-entrega" role="alert" hidden></p>
+              </div>
               <div><label for="hora-entrega">Horario de entrega:</label><input id="hora-entrega" name="hora-entrega" type="time" required></div>
             </div>
             <label for="mensaje-giftcard">Mensaje:</label>
