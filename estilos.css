@@ -1,0 +1,400 @@
+/* Colores, tipografías y reglas compartidas */
+:root {
+  --fondo: #fffdf5;
+  --fondo-encabezado: #f6edde;
+  --fondo-tarjeta: #faf4e9;
+  --dorado: #a18955;
+  --texto-oscuro: #161616;
+  --linea: #e9ddc9;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--fondo); color: var(--texto-oscuro); font-family: "Raleway", Arial, sans-serif; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, p { margin: 0; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+p { text-wrap: pretty; }
+.palabra-manuscrita { color: var(--dorado); font-family: "Corinthia", cursive; font-weight: 400; }
+.descripcion-celular, .texto-menu-celular, .texto-reserva-celular { display: none; }
+
+/* Encabezado */
+.encabezado-sitio { position: relative; z-index: 5; height: 140px; background: var(--fondo-encabezado); }
+.contenido-encabezado { width: min(1360px, calc(100% - 80px)); height: 100%; margin: auto; display: grid; grid-template-columns: 290px 1fr 290px; align-items: center; }
+.marca { display: block; width: 250px; }
+.marca img { width: 100%; height: 135px; object-fit: contain; }
+.navegacion-principal { grid-column: 2; }
+.navegacion-principal ul { display: flex; justify-content: center; gap: clamp(32px, 5.5vw, 100px); list-style: none; padding: 0; margin: 0; }
+.navegacion-principal a { color: var(--dorado); font-size: 24px; white-space: nowrap; }
+.navegacion-principal a[aria-current="page"] { font-weight: 700; }
+.navegacion-principal a:hover, .datos-ubicacion a:hover { text-decoration: underline; }
+.boton-menu { display: none; }
+
+/* Portadas: las cuatro imágenes conservan su proporción 1440 × 379 */
+.portada-fotografica { height: min(379px, 26.32vw); display: flex; align-items: center; background-size: cover; background-repeat: no-repeat; background-position: center bottom; }
+.portada-inicio { justify-content: center; background-image: url("imagenes/portada-inicio.png"); }
+.portada-menu { background-image: url("imagenes/portada-menu.png"); }
+.portada-reservar { justify-content: center; background-image: url("imagenes/portada-reservar.png"); }
+.portada-nosotros { background-image: url("imagenes/portada-nosotros.png"); }
+.portada-inicio h1, .texto-portada { color: var(--dorado); font-family: Georgia, serif; font-weight: 400; line-height: 1.15; }
+.portada-inicio h1 { font-size: clamp(30px, 3.5vw, 50px); text-align: center; }
+.portada-inicio .texto-pequeno { font-size: .65em; }
+.resaltado { padding: 0 7px; background: var(--fondo-encabezado); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.linea-portada .resaltado { display: inline-block; padding: .02em .14em .08em; line-height: 1.05; }
+.texto-portada { width: 100%; padding: 0 clamp(30px, 4.2vw, 60px); font-size: clamp(28px, 3.45vw, 50px); }
+.linea-portada { display: block; margin-bottom: .18em; }
+.linea-portada:last-child { margin-bottom: 0; }
+.portada-reservar .texto-portada { text-align: center; }
+
+/* Botones y recuadros compartidos */
+.boton, .boton-enviar, .boton-comprar { display: inline-block; border: 0; border-radius: 8px; padding: 12px 28px; background: var(--dorado); color: #fff; text-align: center; font-size: 22px; white-space: nowrap; transition: opacity .2s; }
+.boton:hover, .boton-enviar:hover, .boton-comprar:hover { opacity: .88; }
+:focus-visible { outline: 3px solid #5c4625; outline-offset: 3px; }
+.recuadro { display: flex; align-items: center; justify-content: space-between; gap: 26px; padding: 13px 27px; border: 1px solid #b7a27b; background: #fcf5e9; color: var(--dorado); font-size: 26px; }
+.recuadro p { white-space: nowrap; }
+.recuadro .boton { min-width: 210px; padding: 8px 20px; }
+
+/* Inicio: texto y video */
+.seccion-presentacion { padding: 110px clamp(24px, 5vw, 72px) 115px; border-bottom: 1px solid var(--linea); }
+.distribucion-presentacion { max-width: 1190px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 575px); gap: clamp(40px, 6vw, 90px); align-items: center; }
+.texto-presentacion { text-align: center; }
+.texto-presentacion h2 { font-size: 36px; font-weight: 400; line-height: 1.15; }
+.texto-presentacion h2 > span { display: block; }
+.texto-presentacion .palabra-manuscrita { font-size: 75px; }
+.texto-presentacion .palabra-manuscrita, .titulo-definicion .palabra-manuscrita, .datos-reserva .palabra-manuscrita, .invitacion-regalo .palabra-manuscrita { display: inline-block; line-height: .8; vertical-align: baseline; }
+.texto-presentacion .boton { margin-top: 45px; min-width: 225px; }
+.video-presentacion { display: block; width: 100%; aspect-ratio: 464 / 624; object-fit: cover; border: 2px solid #b7a27b; background: #9e775c; }
+
+/* Inicio: definición y mapa */
+.seccion-definicion { padding: 84px clamp(24px, 6vw, 90px) 76px; border-bottom: 1px solid var(--linea); text-align: center; }
+.ancho-contenido { max-width: 1050px; margin: auto; }
+.titulo-definicion { font: 400 37px/1.25 Georgia, serif; }
+.titulo-definicion .palabra-manuscrita { font-size: 88px; }
+.texto-definicion { margin-top: 30px; font-size: 20px; line-height: 1.7; }
+.texto-definicion p + p { margin-top: 22px; }
+.seccion-definicion .boton { margin-top: 45px; min-width: 155px; }
+.seccion-ubicacion { padding: 100px clamp(24px, 6vw, 90px) 105px; }
+.distribucion-ubicacion { max-width: 1080px; margin: auto; display: grid; grid-template-columns: minmax(0, 650px) minmax(260px, 1fr); align-items: center; gap: 60px; }
+.distribucion-ubicacion iframe { display: block; width: 100%; aspect-ratio: 1.18; border: 1px solid #c3a36c; }
+.datos-ubicacion h2 { margin-bottom: 27px; font-size: 70px; line-height: .85; white-space: nowrap; }
+.datos-ubicacion p { margin: 26px 0; font-size: 18px; line-height: 1.35; }
+
+/* Menú: tarjetas más compactas que el mockup */
+.seccion-platos { padding: 70px clamp(26px, 7vw, 110px) 100px; }
+.lista-platos { max-width: 1120px; margin: auto; }
+.tarjeta-plato { display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: center; gap: 34px; min-height: 235px; padding: 16px 28px; margin-bottom: 24px; border: 1px solid var(--linea); border-radius: 24px; background: var(--fondo-tarjeta); }
+.tarjeta-plato img { width: 220px; height: 200px; object-fit: contain; }
+.tarjeta-plato p { font-size: 20px; line-height: 1.42; }
+.alergenos { color: var(--dorado); font-size: .9em; }
+.alergenos strong { font-weight: 700; }
+.cierre-menu { max-width: 850px; margin: 70px auto 0; text-align: center; }
+.cierre-menu > p { font-size: 25px; line-height: 1.45; }
+.recuadro-menu { max-width: 690px; margin: 46px auto 0; }
+
+/* Reservas */
+.seccion-reserva { padding: 74px 24px 40px; }
+.datos-reserva { text-align: center; }
+.datos-reserva h2 { font-size: 40px; font-weight: 400; }
+.datos-reserva .palabra-manuscrita { font-size: 88px; }
+.datos-reserva p { font-size: 30px; line-height: 1.16; }
+.datos-reserva p span, .datos-reserva .dias-reserva, .precio-reserva strong { color: var(--dorado); }
+.datos-reserva .dias-reserva { margin: 20px 0 2px; font-size: 34px; font-weight: 600; }
+.datos-reserva .precio-reserva { margin-top: 27px; font-size: 34px; }
+.datos-reserva .incluye-reserva { font-size: 19px; }
+.formulario-reserva { width: min(840px, 100%); margin: 60px auto 0; padding: 30px 42px 38px; border: 2px solid var(--linea); background: #fffaf1; }
+.formulario-reserva label { display: block; margin: 9px 0 10px; color: var(--dorado); font-size: 24px; }
+.formulario-reserva input, .formulario-reserva select, .formulario-reserva textarea, .formulario-giftcard input:not(.opcion-oculta), .formulario-giftcard textarea { display: block; width: 100%; border: 0; border-radius: 5px; background: #eae9e6; color: var(--texto-oscuro); }
+.formulario-reserva input, .formulario-reserva select { height: 54px; padding: 10px 24px; margin-bottom: 14px; font-size: 19px; }
+.formulario-reserva input[readonly] { cursor: pointer; }
+.formulario-reserva .selector-fecha input { padding-right: 48px; background-image: url("imagenes/calendario.svg"); background-repeat: no-repeat; background-position: right 18px center; background-size: 21px; }
+.campos-turno { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.selector-fecha { position: relative; }
+.calendario-reserva[hidden], .error-fecha[hidden] { display: none; }
+.calendario-reserva { position: absolute; z-index: 8; top: calc(100% - 5px); left: 0; width: min(330px, calc(100vw - 64px)); padding: 16px; border: 1px solid var(--dorado); border-radius: 7px; background: var(--fondo); box-shadow: 0 8px 22px #0003; }
+.cabecera-calendario { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; color: var(--dorado); font-size: 18px; text-transform: capitalize; }
+.cabecera-calendario button { width: 35px; height: 35px; border: 1px solid var(--linea); border-radius: 5px; background: var(--fondo-encabezado); color: var(--dorado); font-size: 25px; }
+.cabecera-calendario button:disabled { opacity: .35; cursor: default; }
+.dias-semana, .dias-calendario { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; text-align: center; }
+.dias-semana { margin-bottom: 5px; color: var(--dorado); font-size: 13px; }
+.dias-calendario button { aspect-ratio: 1; padding: 0; border: 1px solid transparent; border-radius: 4px; background: var(--fondo-encabezado); color: var(--texto-oscuro); font-size: 15px; }
+.dias-calendario button:not(:disabled):hover, .dias-calendario button[aria-pressed="true"] { background: var(--dorado); color: #fff; }
+.dias-calendario button:disabled { background: transparent; color: #aaa; cursor: default; }
+.ayuda-oculta { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.error-fecha { margin: 4px 0 10px; color: #953b32; font-size: 15px; }
+.formulario-reserva textarea { min-height: 180px; padding: 12px 24px; font-size: 19px; resize: vertical; }
+.ayuda-restricciones { margin-top: 8px; color: var(--dorado); font-size: 16px; }
+input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; }
+.boton-enviar { display: block; min-width: 210px; margin: 34px auto 0; cursor: pointer; }
+.notas-reserva { padding: 45px 24px 65px; }
+.contenido-notas { max-width: 900px; margin: auto; }
+.contenido-notas h2 { margin-bottom: 25px; color: var(--dorado); font-size: 36px; font-weight: 500; }
+.contenido-notas ul { padding-left: 32px; margin: 0; font-size: 26px; line-height: 1.55; }
+.contenido-notas li { margin-bottom: 8px; }
+.contenido-notas li span { color: var(--dorado); }
+.invitacion-regalo { padding: 100px 24px 150px; border-top: 1px solid var(--linea); text-align: center; }
+.invitacion-regalo h2 { font-size: 36px; font-weight: 400; }
+.invitacion-regalo .palabra-manuscrita { font-size: 77px; }
+.invitacion-regalo p { margin: 24px 0 54px; font-size: 29px; }
+
+/* Nuestro staff */
+.seccion-equipo { padding: 75px clamp(28px, 7vw, 100px) 80px; }
+.contenido-equipo { max-width: 1060px; margin: auto; }
+.integrante-equipo { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; align-items: center; margin-bottom: 65px; }
+.integrante-equipo img { width: 280px; height: 280px; border: 3px solid var(--dorado); border-radius: 50%; object-fit: cover; object-position: center 28%; }
+.integrante-equipo h2 { color: var(--dorado); font-size: 27px; font-weight: 700; }
+.integrante-equipo h2 small { font-size: 21px; font-weight: 500; }
+.integrante-equipo p { font-size: 21px; line-height: 1.36; }
+.recuadro-equipo { max-width: 606px; margin: 0 auto; }
+
+/* Gift cards digitales */
+.seccion-giftcards { padding: 140px clamp(25px, 5vw, 70px) 138px; }
+.distribucion-giftcards { max-width: 1250px; margin: auto; display: grid; grid-template-columns: minmax(0, .44fr) minmax(0, .56fr); align-items: stretch; gap: 32px; }
+.foto-giftcard { width: 100%; height: 100%; max-height: 1280px; object-fit: cover; object-position: center center; border: 2px solid #b7a27b; }
+.contenido-giftcard h1 { margin-bottom: 34px; font-size: 36px; font-weight: 400; line-height: 1.15; text-wrap: pretty; }
+.formulario-giftcard fieldset { min-width: 0; padding: 0; border: 0; }
+.formulario-giftcard legend, .formulario-giftcard > label, .campos-entrega label { display: block; margin-bottom: 15px; color: var(--dorado); font: 400 31px/1.15 Georgia, serif; }
+.grupo-opciones { margin: 0 0 45px; }
+.opciones-valor, .opciones-destinatario { display: flex; flex-wrap: wrap; gap: 16px 22px; }
+.opciones-valor label, .opciones-destinatario label { display: inline-flex; min-height: 58px; align-items: center; justify-content: center; padding: 9px 22px; border: 1px solid var(--dorado); background: var(--fondo-encabezado); font-size: 23px; text-align: center; cursor: pointer; }
+.opciones-destinatario label { min-width: 260px; }
+.opcion-oculta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.opcion-oculta:checked + label { background: var(--dorado); color: #fff; }
+.opcion-oculta:focus-visible + label { outline: 3px solid #5c4625; outline-offset: 3px; }
+.formulario-giftcard > label { margin-top: 42px; }
+.formulario-giftcard input:not(.opcion-oculta) { height: 54px; padding: 10px 25px; font-size: 20px; }
+.campos-entrega { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; margin-top: 54px; }
+.campos-entrega input { max-width: 260px; }
+.formulario-giftcard textarea { min-height: 156px; padding: 16px 25px; font-size: 20px; resize: vertical; }
+.aclaracion-giftcard { margin: 13px 0 27px; font-size: 18px; }
+.boton-comprar { width: 100%; cursor: pointer; }
+
+/* Pantallas de confirmación */
+.seccion-confirmacion { max-width: 1330px; margin: auto; padding: 275px clamp(25px, 4vw, 60px) 305px; text-align: center; }
+.seccion-confirmacion h1 { color: var(--dorado); font: 400 clamp(50px, 5.8vw, 82px)/1.1 Georgia, serif; }
+.seccion-confirmacion > p { margin: 48px 0 0; font-size: 34px; line-height: 1.5; }
+.acciones-confirmacion { display: flex; justify-content: center; flex-wrap: wrap; gap: 80px; margin-top: 200px; }
+.seccion-confirmacion > p + .acciones-confirmacion { margin-top: 70px; }
+.acciones-confirmacion .boton { min-width: 270px; }
+.boton-contorno { border: 1px solid var(--dorado); background: var(--fondo-encabezado); color: var(--dorado); }
+.galeria-confirmacion { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 35px; max-width: 1240px; margin: 120px auto 0; }
+.galeria-confirmacion img { width: 100%; aspect-ratio: 0.76; object-fit: cover; }
+
+/* Pie de página */
+.pie-sitio { background: var(--dorado); }
+.contenido-pie { min-height: 140px; padding: 16px 25px; display: flex; justify-content: center; align-items: center; gap: 25px; }
+.logo-pie { width: 235px; }
+.contenido-pie p { white-space: nowrap; font-size: 23px; }
+.enlaces-redes { display: flex; align-items: center; gap: 22px; }
+.enlaces-redes img { width: 26px; height: 26px; }
+
+@media (max-width: 1100px) {
+  .contenido-encabezado { width: calc(100% - 48px); grid-template-columns: 210px 1fr; }
+  .marca { width: 200px; }
+  .navegacion-principal ul { gap: clamp(20px, 4vw, 42px); }
+  .navegacion-principal a { font-size: 20px; }
+  .texto-presentacion h2 { font-size: 29px; }
+  .texto-presentacion .palabra-manuscrita { font-size: 60px; }
+  .distribucion-ubicacion { grid-template-columns: 1fr 1fr; gap: 35px; }
+  .datos-ubicacion h2 { font-size: 55px; }
+  .tarjeta-plato { grid-template-columns: 185px minmax(0, 1fr); }
+  .tarjeta-plato img { width: 185px; height: 170px; }
+  .tarjeta-plato p { font-size: 18px; }
+  .integrante-equipo { grid-template-columns: 235px minmax(0, 1fr); gap: 26px; }
+  .integrante-equipo img { width: 235px; height: 235px; }
+  .integrante-equipo h2 { font-size: 23px; }
+  .integrante-equipo h2 small { font-size: 18px; }
+  .integrante-equipo p { font-size: 18px; }
+  .formulario-giftcard legend, .formulario-giftcard > label, .campos-entrega label { font-size: 25px; }
+  .opciones-valor label, .opciones-destinatario label { font-size: 18px; }
+  .opciones-destinatario label { min-width: 190px; }
+  .seccion-confirmacion > p { font-size: 28px; }
+}
+
+@media (max-width: 800px) {
+  .encabezado-sitio { height: 64px; }
+  .contenido-encabezado { width: calc(100% - 36px); display: flex; justify-content: space-between; }
+  .marca { width: 126px; }
+  .marca img { height: 60px; }
+  .boton-menu { display: flex; flex-direction: column; justify-content: center; gap: 7px; width: 38px; height: 42px; border: 0; padding: 0; background: transparent; }
+  .boton-menu span { display: block; width: 28px; height: 2px; background: var(--dorado); }
+  .navegacion-principal { display: none; position: absolute; top: 64px; left: 0; width: 100%; background: var(--fondo-encabezado); box-shadow: 0 8px 16px #0002; }
+  .navegacion-principal.abierto { display: block; }
+  .navegacion-principal ul { display: block; }
+  .navegacion-principal a { display: block; padding: 14px 20px; text-align: center; font-size: 18px; }
+  .portada-fotografica { height: 210px; }
+  .texto-portada { padding: 0 20px; font-size: clamp(22px, 3.55vw, 32px); }
+  .portada-reservar .texto-portada { font-size: clamp(20px, 3.2vw, 28px); }
+  .portada-inicio h1 { font-size: clamp(24px, 4vw, 34px); }
+  .seccion-presentacion { padding: 70px 26px; }
+  .distribucion-presentacion { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .texto-presentacion h2 { font-size: 24px; }
+  .texto-presentacion .palabra-manuscrita { font-size: 50px; }
+  .texto-presentacion .boton { min-width: 0; margin-top: 30px; }
+  .boton { font-size: 18px; }
+  .titulo-definicion { font-size: 29px; }
+  .titulo-definicion .palabra-manuscrita { font-size: 66px; }
+  .texto-definicion { font-size: 18px; }
+  .distribucion-ubicacion { grid-template-columns: 1fr; max-width: 620px; }
+  .datos-ubicacion { text-align: center; }
+  .datos-ubicacion h2 { white-space: normal; }
+  .tarjeta-plato { min-height: 190px; padding: 14px 22px; margin-bottom: 20px; }
+  .tarjeta-plato img { height: 160px; }
+  .tarjeta-plato p { font-size: 16px; }
+  .cierre-menu > p { font-size: 19px; }
+  .recuadro { font-size: 20px; }
+  .recuadro .boton { min-width: 135px; }
+  .datos-reserva h2 { font-size: 31px; }
+  .datos-reserva .palabra-manuscrita { font-size: 65px; }
+  .datos-reserva p { font-size: 24px; }
+  .datos-reserva .dias-reserva, .datos-reserva .precio-reserva { font-size: 26px; }
+  .contenido-notas h2 { font-size: 28px; }
+  .contenido-notas ul { font-size: 20px; }
+  .invitacion-regalo h2 { font-size: 28px; }
+  .invitacion-regalo .palabra-manuscrita { font-size: 58px; }
+  .invitacion-regalo p { font-size: 22px; }
+  .seccion-giftcards { padding: 70px 28px; }
+  .distribucion-giftcards { grid-template-columns: 1fr 1.1fr; gap: 24px; }
+  .contenido-giftcard h1 { font-size: 26px; }
+  .salto-escritorio { display: none; }
+  .grupo-opciones { margin-bottom: 26px; }
+  .formulario-giftcard > label { margin-top: 26px; }
+  .opciones-valor, .opciones-destinatario { gap: 8px; }
+  .opciones-valor label, .opciones-destinatario label { min-height: 42px; padding: 7px 10px; font-size: 14px; }
+  .opciones-destinatario label { min-width: 0; }
+  .campos-entrega { gap: 16px; margin-top: 27px; }
+  .formulario-giftcard legend, .formulario-giftcard > label, .campos-entrega label { font-size: 19px; }
+  .formulario-giftcard input:not(.opcion-oculta) { height: 42px; }
+  .seccion-confirmacion { padding: 150px 26px 150px; }
+  .acciones-confirmacion { margin-top: 100px; gap: 25px; }
+  .seccion-confirmacion > p + .acciones-confirmacion { margin-top: 55px; }
+  .galeria-confirmacion { gap: 18px; margin-top: 90px; }
+  .acciones-confirmacion .boton { min-width: 190px; }
+  .contenido-pie { min-height: 110px; }
+  .logo-pie { width: 170px; }
+  .contenido-pie p { font-size: 17px; }
+  .enlaces-redes { gap: 12px; }
+  .enlaces-redes img { width: 20px; height: 20px; }
+}
+
+@media (max-width: 700px) {
+  .texto-menu-escritorio, .texto-reserva-escritorio { display: none; }
+  .texto-menu-celular, .texto-reserva-celular { display: block; }
+  .portada-menu { background-position: right center; }
+  .portada-menu .texto-portada { max-width: 78%; }
+}
+
+@media (max-width: 600px) {
+  .portada-fotografica { height: 150px; }
+  .portada-inicio { background-position: center bottom; }
+  .portada-menu { background-position: right bottom; }
+  .portada-reservar { background-position: 40% bottom; }
+  .portada-nosotros { background-position: right bottom; }
+  .portada-inicio h1 { font-size: clamp(17px, 5vw, 24px); }
+  .texto-portada { padding: 0 16px; font-size: clamp(14px, 3.7vw, 20px); }
+  .portada-menu .texto-portada { max-width: 80%; }
+  .portada-nosotros .texto-portada { font-size: clamp(12px, 3.5vw, 18px); }
+  .portada-reservar .texto-portada { font-size: clamp(13px, 3.5vw, 18px); }
+  .texto-menu-escritorio, .texto-reserva-escritorio, .descripcion-escritorio { display: none; }
+  .texto-menu-celular, .texto-reserva-celular { display: block; }
+  .descripcion-celular { display: inline; }
+  .linea-portada { margin-bottom: 5px; }
+  .resaltado { padding: 0 4px; }
+  .seccion-presentacion { padding: 50px 25px 60px; }
+  .distribucion-presentacion { grid-template-columns: 1fr; max-width: 470px; gap: 34px; }
+  .texto-presentacion h2 { font-size: 25px; }
+  .texto-presentacion .palabra-manuscrita { font-size: 56px; }
+  .texto-presentacion .boton { margin-top: 24px; }
+  .video-presentacion { width: min(100%, 390px); margin: auto; }
+  .seccion-definicion { padding: 50px 26px 55px; }
+  .titulo-definicion { font-size: 22px; }
+  .titulo-definicion .palabra-manuscrita { font-size: 50px; }
+  .texto-definicion { margin-top: 25px; font-size: 15px; line-height: 1.58; }
+  .texto-definicion p + p { margin-top: 18px; }
+  .seccion-definicion .boton { margin-top: 30px; }
+  .seccion-ubicacion { padding: 55px 26px 70px; }
+  .distribucion-ubicacion iframe { aspect-ratio: 1.25; }
+  .datos-ubicacion h2 { font-size: 56px; }
+  .datos-ubicacion p { margin: 15px 0; font-size: 15px; }
+  .seccion-platos { padding: 45px 25px 65px; }
+  .tarjeta-plato { display: flex; flex-direction: column; gap: 12px; padding: 20px 18px; min-height: 0; margin-bottom: 18px; }
+  .tarjeta-plato img { width: 180px; height: 145px; }
+  .tarjeta-plato p { font-size: 14px; line-height: 1.45; text-align: center; }
+  .cierre-menu { margin-top: 44px; }
+  .cierre-menu > p { font-size: 16px; }
+  .cierre-menu > p br { display: none; }
+  .recuadro { justify-content: center; gap: 12px; padding: 8px 12px; font-size: 13px; }
+  .recuadro p { white-space: nowrap; }
+  .recuadro .boton { min-width: 0; padding: 7px 13px; font-size: 12px; }
+  .recuadro-menu { margin-top: 30px; }
+  .seccion-reserva { padding: 48px 24px 20px; }
+  .datos-reserva h2 { font-size: 25px; }
+  .datos-reserva .palabra-manuscrita { font-size: 55px; }
+  .datos-reserva p { font-size: 18px; }
+  .datos-reserva .dias-reserva { margin-top: 12px; font-size: 20px; }
+  .datos-reserva .precio-reserva { margin-top: 16px; font-size: 21px; }
+  .datos-reserva .incluye-reserva { font-size: 12px; }
+  .formulario-reserva { margin-top: 38px; padding: 21px 18px 25px; }
+  .formulario-reserva label { margin: 8px 0 6px; font-size: 15px; line-height: 1.3; }
+  .formulario-reserva input, .formulario-reserva select { height: 40px; padding: 8px 12px; font-size: 14px; }
+  .campos-turno { grid-template-columns: 1fr; gap: 0; }
+  .calendario-reserva { top: calc(100% - 5px); }
+  .formulario-reserva textarea { min-height: 105px; padding: 10px 12px; font-size: 14px; }
+  .ayuda-restricciones { font-size: 12px; }
+  .boton-enviar { min-width: 120px; padding: 8px 20px; margin-top: 20px; font-size: 15px; }
+  .notas-reserva { padding: 35px 30px 45px; }
+  .contenido-notas h2 { font-size: 22px; }
+  .contenido-notas ul { font-size: 15px; line-height: 1.45; }
+  .invitacion-regalo { padding: 65px 25px 80px; }
+  .invitacion-regalo h2 { font-size: 22px; }
+  .invitacion-regalo .palabra-manuscrita { font-size: 48px; }
+  .invitacion-regalo p { margin: 18px 0 30px; font-size: 17px; }
+  .seccion-equipo { padding: 60px 28px 70px; }
+  .integrante-equipo { display: flex; flex-direction: column; gap: 16px; margin-bottom: 45px; text-align: center; }
+  .integrante-equipo img { width: 175px; height: 175px; }
+  .integrante-equipo h2 { font-size: 19px; }
+  .integrante-equipo h2 small { font-size: 15px; }
+  .integrante-equipo p { margin-top: 8px; font-size: 14px; line-height: 1.42; }
+  .integrante-equipo p br { display: none; }
+  .seccion-giftcards { padding: 45px 25px 70px; }
+  .distribucion-giftcards { display: block; }
+  .foto-giftcard { width: min(100%, 470px); height: min(110vw, 450px); margin: 0 auto 35px; object-position: center 70%; }
+  .contenido-giftcard h1 { margin-bottom: 30px; font-size: 24px; }
+  .formulario-giftcard legend, .formulario-giftcard > label, .campos-entrega label { font-size: 22px; }
+  .grupo-opciones { margin-bottom: 29px; }
+  .opciones-valor, .opciones-destinatario { gap: 9px; }
+  .opciones-valor label, .opciones-destinatario label { min-height: 42px; font-size: 14px; padding: 7px 10px; }
+  .formulario-giftcard > label { margin-top: 27px; }
+  .formulario-giftcard input:not(.opcion-oculta) { height: 42px; padding: 8px 13px; font-size: 15px; }
+  .campos-entrega { gap: 12px; }
+  .campos-entrega label { min-height: 48px; }
+  .formulario-giftcard textarea { min-height: 105px; padding: 11px 13px; font-size: 15px; }
+  .aclaracion-giftcard { font-size: 13px; }
+  .boton-comprar { padding: 10px; font-size: 16px; }
+  .seccion-confirmacion { padding: 115px 23px 125px; }
+  .seccion-confirmacion h1 { font-size: clamp(34px, 8vw, 49px); }
+  .seccion-confirmacion > p { margin-top: 32px; font-size: 18px; }
+  .acciones-confirmacion, .seccion-confirmacion > p + .acciones-confirmacion { gap: 13px; margin-top: 70px; }
+  .acciones-confirmacion .boton { min-width: 145px; padding: 10px 15px; font-size: 14px; }
+  .galeria-confirmacion { grid-auto-flow: column; grid-auto-columns: min(73vw, 310px); grid-template-columns: none; gap: 14px; overflow-x: auto; margin-top: 70px; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+  .galeria-confirmacion img { scroll-snap-align: center; }
+  .contenido-pie { min-height: 95px; gap: 10px; padding: 14px 12px; }
+  .logo-pie { width: 95px; }
+  .contenido-pie p { font-size: 11px; }
+  .enlaces-redes { gap: 7px; }
+  .enlaces-redes img { width: 14px; height: 14px; }
+}
+
+@media (max-width: 380px) {
+  .portada-fotografica { height: 135px; }
+  .portada-menu .texto-portada { max-width: 84%; font-size: 13px; }
+  .portada-nosotros .texto-portada { font-size: 12px; }
+  .recuadro { font-size: 11px; gap: 8px; }
+  .recuadro .boton { font-size: 11px; padding: 6px 10px; }
+  .opciones-valor label { font-size: 13px; }
+  .contenido-pie { gap: 7px; }
+  .logo-pie { width: 82px; }
+  .contenido-pie p { font-size: 10px; }
+  .enlaces-redes img { width: 12px; height: 12px; }
+}
