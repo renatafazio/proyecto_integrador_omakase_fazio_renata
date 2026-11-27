@@ -84,7 +84,7 @@ p { text-wrap: pretty; }
 .texto-presentacion .palabra-manuscrita { font-size: 75px; }
 .texto-presentacion .palabra-manuscrita, .titulo-definicion .palabra-manuscrita, .datos-reserva .palabra-manuscrita, .invitacion-regalo .palabra-manuscrita { display: inline-block; line-height: .8; vertical-align: baseline; }
 .texto-presentacion .boton { margin-top: 45px; min-width: 225px; }
-.video-presentacion { display: block; width: 100%; aspect-ratio: 464 / 624; object-fit: cover; border: 2px solid #b7a27b; background: #9e775c; }
+.video-presentacion { display: block; width: 100%; aspect-ratio: 464 / 624; object-fit: cover; border: 2px solid #b7a27b; background: #9e775c; box-shadow: 0 10px 18px -10px rgb(72 48 24 / 24%); }
 
 /* Inicio: definición y mapa */
 .seccion-definicion { padding: 84px clamp(24px, 6vw, 90px) 76px; border-bottom: 1px solid var(--linea); text-align: center; }
