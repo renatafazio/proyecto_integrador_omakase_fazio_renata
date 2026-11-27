@@ -43,6 +43,12 @@ p { text-wrap: pretty; }
 
 /* Portadas: las cuatro imágenes conservan su proporción 1440 × 379 */
 .portada-fotografica { height: min(379px, 26.32vw); display: flex; align-items: center; background-size: cover; background-repeat: no-repeat; background-position: center bottom; }
+/* Sombra suave en el borde inferior de las portadas */
+.portada-fotografica, .cabecera-tienda {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 9px 16px -8px rgb(72 48 24 / 30%);
+}
 .portada-inicio { justify-content: center; background-image: url("imagenes/portada-inicio.png"); }
 .portada-menu { background-image: url("imagenes/portada-menu.png"); }
 .portada-reservar { justify-content: center; background-image: url("imagenes/portada-reservar.png"); }
@@ -58,8 +64,7 @@ p { text-wrap: pretty; }
 .portada-reservar .texto-portada { text-align: center; }
 
 /* Botones y recuadros compartidos */
-.boton, .boton-enviar, .boton-comprar { display: inline-block; border: 0; border-radius: 8px; padding: 12px 28px; background: var(--dorado); color: #fff; text-align: center; font-size: 22px; white-space: nowrap; transition: opacity .2s; }
-.boton:hover, .boton-enviar:hover, .boton-comprar:hover { opacity: .88; }
+.boton, .boton-enviar, .boton-comprar { display: inline-block; border: 0; border-radius: 8px; padding: 12px 28px; background: var(--dorado); color: #fff; text-align: center; font-size: 22px; white-space: nowrap; }
 :focus-visible { outline: 3px solid #5c4625; outline-offset: 3px; }
 .recuadro { display: flex; align-items: center; justify-content: space-between; gap: 26px; padding: 13px 27px; border: 1px solid #b7a27b; background: #fcf5e9; color: var(--dorado); font-size: 26px; }
 .recuadro p { white-space: nowrap; }
@@ -233,7 +238,6 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
 .compra-sake { margin-top: auto; padding-top: 20px; }
 .compra-sake strong { display: block; margin-bottom: 15px; font: 400 29px/1 Georgia, serif; }
 .compra-sake button { width: 100%; min-height: 47px; padding: 10px 12px; border: 1px solid var(--dorado); border-radius: 6px; background: var(--dorado); color: #fff; font-size: 15px; font-weight: 600; }
-.compra-sake button:hover { background: #8b7040; }
 .aviso-tienda { margin-top: 28px; padding: 13px 18px; border: 1px solid #c5b183; border-radius: 6px; background: #f8f0e4; color: #6d5732; text-align: center; }
 .aviso-tienda[hidden], .carrito-vacio[hidden], .contenido-carrito[hidden] { display: none; }
 
@@ -350,6 +354,47 @@ input::placeholder, textarea::placeholder { color: #99999c; font-style: italic; 
 .contenido-pie p { white-space: nowrap; font-size: 23px; }
 .enlaces-redes { display: flex; align-items: center; gap: 22px; }
 .enlaces-redes img { width: 26px; height: 26px; }
+
+/* Efectos al pasar el cursor */
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta-plato, .tarjeta-sake, .integrante-equipo > img {
+    --escala-hover: 1.025;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .tarjeta-plato:hover, .tarjeta-sake:hover, .integrante-equipo > img:hover {
+    box-shadow: 0 8px 20px rgb(79 58 29 / 16%);
+  }
+
+  :where(.formulario-reserva, .formulario-giftcard, #formulario-carrito) :is(input:not([type="hidden"], .opcion-oculta), select, textarea),
+  :is(.opciones-valor, .opciones-destinatario) label,
+  .boton, .boton-enviar, .boton-comprar, .compra-sake button {
+    transition: box-shadow .2s ease;
+  }
+  :where(.formulario-reserva, .formulario-giftcard, #formulario-carrito) :is(input:not([type="hidden"], .opcion-oculta), select, textarea):not(:disabled):hover,
+  :is(.opciones-valor, .opciones-destinatario) label:hover,
+  :is(.boton, .boton-enviar, .boton-comprar, .compra-sake button):not(:disabled):hover {
+    box-shadow: 0 4px 12px rgb(79 58 29 / 19%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .tarjeta-plato:hover, .tarjeta-sake:hover, .integrante-equipo > img:hover {
+    transform: scale(var(--escala-hover));
+  }
+  .tarjeta-plato > img {
+    transition: transform .22s ease;
+  }
+  .tarjeta-plato:hover > img {
+    transform: scale(1.05);
+  }
+  /* El botón conserva su tamaño aunque se agrande la tarjeta que lo contiene. */
+  .tarjeta-sake .compra-sake button {
+    transition: transform .22s ease, box-shadow .2s ease;
+  }
+  .tarjeta-sake:hover .compra-sake button {
+    transform: scale(calc(1 / var(--escala-hover)));
+  }
+}
 
 @media (max-width: 1100px) {
   .contenido-encabezado { width: calc(100% - 48px); grid-template-columns: 155px minmax(0, 1fr) 155px; }
